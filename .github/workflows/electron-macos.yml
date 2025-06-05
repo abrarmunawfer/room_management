@@ -3,6 +3,7 @@ name: Build macOS App
 on:
   push:
     branches: [main]
+
 jobs:
   test:
     runs-on: macos-latest
@@ -30,9 +31,11 @@ jobs:
         run: brew install coreutils
 
       - name: Fix JRE executable permissions
-        run: chmod +x ./jre/bin/*
+        run: chmod +x ./jre/bin/* || echo "No local JRE found, skipping chmod"
 
       - name: Test App with npm start
+        env:
+          JAVA_EXEC: java   # use system java executable on runner
         run: |
           echo "Starting Electron app in test mode..."
           gtimeout 10 npm start || true

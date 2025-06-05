@@ -23,7 +23,11 @@ function startBackend(dataDir) {
   const isDev = !app.isPackaged;
   const basePath = isDev ? __dirname : process.resourcesPath;
   const backendJarPath = path.join(basePath, 'backend', 'target', 'backend-0.0.1-SNAPSHOT.jar');
-  const javaExecutable = path.join(basePath, 'jre', 'bin', process.platform === 'win32' ? 'java.exe' : 'java');
+
+  // Use JAVA_EXEC env var if set (CI), otherwise bundled JRE
+  const javaExecutable = process.env.JAVA_EXEC
+    ? process.env.JAVA_EXEC
+    : path.join(basePath, 'jre', 'bin', process.platform === 'win32' ? 'java.exe' : 'java');
 
   console.log('Running in', isDev ? 'development' : 'production', 'mode');
   console.log('Starting backend from:', backendJarPath);
@@ -96,14 +100,13 @@ function showMainWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
-    icon: iconPath,  // set main window icon
+    icon: iconPath,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
 
-  
   mainWindow.loadURL(indexPath).catch(err => {
     console.error('Error loading frontend:', err);
   });
