@@ -38,5 +38,5 @@ jobs:
           JAVA_EXEC: java   # use system java executable on runner
         run: |
           echo "Starting Electron app in test mode..."
-          gtimeout 10 npm start || true
+          gtimeout 120 npm start || true
         continue-on-error: true
