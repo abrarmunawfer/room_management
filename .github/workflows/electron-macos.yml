@@ -1,11 +1,11 @@
-name: Test and Build macOS App
+name: Test Electron App on macOS
 
 on:
   push:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: macos-latest
 
     steps:
@@ -18,17 +18,11 @@ jobs:
 
       - run: npm install
 
+      - name: Install gtimeout (for macOS)
+        run: brew install coreutils
+
       - name: Test App with npm start
         run: |
           echo "Starting Electron app in test mode..."
-          timeout 10 npm start || true
+          gtimeout 10 npm start || true
         continue-on-error: true
-
-      - run: npm run build
-      - run: npm run dist
-
-      - name: Upload macOS App
-        uses: actions/upload-artifact@v4
-        with:
-          name: RoomManagementApp-macos
-          path: dist/*.dmg
