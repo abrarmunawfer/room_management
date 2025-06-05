@@ -1,15 +1,18 @@
-name: Test Electron App on macOS
-
-on:
-  push:
-    branches: [main]
-
 jobs:
   test:
     runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Java (JDK)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build backend with Maven
+        run: mvn -f backend/pom.xml clean package
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -20,6 +23,9 @@ jobs:
 
       - name: Install gtimeout (for macOS)
         run: brew install coreutils
+
+      - name: Fix JRE executable permissions
+        run: chmod +x ./jre/bin/*
 
       - name: Test App with npm start
         run: |
