@@ -1,0 +1,82 @@
+.profits-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-left: 250px;
+}
+
+.filter-group {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* spacing between cards */
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.profit-card {
+  flex: 1 1 250px; /* grow, shrink, base width */
+  max-width: 300px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+  padding: 1rem;
+  /* make all cards same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buttons-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem;
+  box-shadow: 24px;
+  border-radius: 8px;
+  outline: none;
+  min-width: 300px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.edit-button{
+    background-color: #8b008b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .delete-button{
+    background-color: #e53935;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Add this for table header text */
+.MuiTableHead-root th {
+  color: white !important;
+  background-color: #8b008b; 
+}

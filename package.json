@@ -1,0 +1,80 @@
+{
+  "name": "room-management",
+  "version": "1.0.0",
+  "description": "A fully offline Room Management desktop application with integrated backend and frontend.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "keywords": [
+    "room",
+    "management",
+    "desktop",
+    "electron",
+    "springboot",
+    "h2"
+  ],
+  "author": "Nexlance Global Solutions (PVT) LTD",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^36.2.1",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.ngs.roommanagement",
+    "productName": "RoomManagementApp",
+    "asar": true,
+    "files": [
+      "main.js",
+      "splash.html",
+      "logo.jpg",
+      "backend/**/*",
+      "frontend/build/**/*",
+      "jre/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/target/backend-0.0.1-SNAPSHOT.jar",
+        "to": "backend/target/backend-0.0.1-SNAPSHOT.jar"
+      },
+      {
+        "from": "frontend/build",
+        "to": "frontend/build"
+      },
+      {
+        "from": "jre",
+        "to": "jre"
+      }
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "frontend/build/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "frontend/build/icon.icns"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "scripts": {
+      "start": "electron .",
+      "build": "electron-builder"
+    }
+
+  }
+}

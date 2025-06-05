@@ -1,0 +1,116 @@
+.incomes-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    margin-left: 250px; /* if your sidebar width is 250px */
+  }
+  
+  .incomes-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .incomes-header input {
+    padding: 8px;
+    width: 200px;
+  }
+  
+  .add-button {
+    background-color: #8b008b;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .income-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%; /* Ensure the container takes up the full width */
+  }
+  
+  .edit-button{
+    background-color: #8b008b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .delete-button{
+    background-color: #e53935;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-button {
+    margin-right: 10px; /* Optional, for spacing between buttons */
+  }
+  
+  
+  .income-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .income-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 1px 2px 5px #8b008b;
+    width: calc(33% - 20px);
+    box-sizing: border-box;
+  }
+  
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 400px;
+  }
+  
+  .modal input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-actions button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .modal-actions button:first-child {
+    background-color: #8b008b;
+    color: white;
+  }
+  
+  .modal-actions button:last-child {
+    background-color: #ccc;
+  }
+  

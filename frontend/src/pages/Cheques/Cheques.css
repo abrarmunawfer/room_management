@@ -1,0 +1,133 @@
+.cheques-page {
+  padding: 20px;
+  margin-left: 250px;
+}
+
+.cheques-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cheques-header input{
+    padding: 8px;
+    width: 200px;
+}
+.cheques-header button {
+  padding: 8px;
+  background-color: #8b008b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%; /* Ensure the container takes up the full width */
+}
+.add-button,
+.filter-button {
+  background-color: #8b008b;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.cheques-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cheque-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 1px 2px 5px #8b008b;
+    width: calc(33% - 20px);
+    box-sizing: border-box;
+}
+
+.cheque-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-button,
+.delete-button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #ffa500;
+  color: white;
+}
+
+.delete-button {
+  background-color: #ff4c4c;
+  color: white;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal h2 {
+  text-align: center;
+  margin: 16px;
+}
+
+.modal-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px;
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  background-color: #f9f9f9;
+}
+

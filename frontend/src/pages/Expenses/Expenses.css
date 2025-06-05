@@ -1,0 +1,122 @@
+/* Basic Layout for Filters */
+.expenses-page{
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-left: 250px; 
+}
+.expenses-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-expenses {
+  padding: 8px;
+  font-size: 14px;
+  width: 150px; /* Adjust width for select and input */
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #8b008b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.expenses-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.expense-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 1px 2px 5px #8b008b;
+    width: calc(33% - 20px);
+    box-sizing: border-box;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  width: 45%;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: #ccc;
+}
+
+button:hover {
+  background-color: #7a007a;
+}
+
+.cancel:hover {
+  background-color: #b0b0b0;
+}
+
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.action-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.action-buttons .delete-button {
+  background-color: #e53935;
+  color: white;
+}
+
+.action-buttons button:hover {
+  opacity: 0.9;
+}
