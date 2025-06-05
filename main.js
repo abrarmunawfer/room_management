@@ -22,23 +22,35 @@ function ensureDataDirectory() {
 function startBackend(dataDir) {
   const isDev = !app.isPackaged;
   const basePath = isDev ? __dirname : process.resourcesPath;
-  const backendJarPath = path.join(basePath, 'backend', 'target', 'backend-0.0.1-SNAPSHOT.jar');
 
-  // Use JAVA_EXEC env var if set (CI), otherwise bundled JRE
+  const backendJarPath = path.join(basePath, 'backend', 'target', 'backend-0.0.1-SNAPSHOT.jar');
   const javaExecutable = process.env.JAVA_EXEC
     ? process.env.JAVA_EXEC
     : path.join(basePath, 'jre', 'bin', process.platform === 'win32' ? 'java.exe' : 'java');
 
   console.log('Running in', isDev ? 'development' : 'production', 'mode');
-  console.log('Starting backend from:', backendJarPath);
-  console.log('Using Java executable:', javaExecutable);
-  console.log('Passing data dir:', dataDir);
+  console.log('Base path:', basePath);
+  console.log('Backend JAR path:', backendJarPath);
+  console.log('Java executable path:', javaExecutable);
+  console.log('Data directory:', dataDir);
+
+  if (!fs.existsSync(backendJarPath)) {
+    console.error('ERROR: Backend JAR not found at:', backendJarPath);
+    return;
+  }
+
+  if (!javaExecutable || (!fs.existsSync(javaExecutable) && !process.env.JAVA_EXEC)) {
+    console.error('ERROR: Java executable not found at:', javaExecutable);
+    console.error('If you expect to use system java, set JAVA_EXEC env variable.');
+    return;
+  }
 
   backendProcess = spawn(javaExecutable, [`-Dapp.data.dir=${dataDir}`, '-jar', backendJarPath]);
 
   backendProcess.stdout.on('data', (data) => {
-    console.log(`[Backend stdout]: ${data.toString()}`);
-    if (data.toString().includes("Started RoomManagementAppApplication")) {
+    const msg = data.toString();
+    console.log(`[Backend stdout]: ${msg}`);
+    if (msg.includes('Started RoomManagementAppApplication')) {
       showMainWindow();
     }
   });
@@ -91,11 +103,20 @@ function showMainWindow() {
 
   const isDev = !app.isPackaged;
   const basePath = isDev ? __dirname : process.resourcesPath;
+
   const { pathToFileURL } = require('url');
-  const indexPath = pathToFileURL(path.join(basePath, 'frontend', 'build', 'index.html')).href;
+  const indexHtmlPath = path.join(basePath, 'frontend', 'build', 'index.html');
+
+  if (!fs.existsSync(indexHtmlPath)) {
+    console.error('ERROR: Frontend index.html not found at:', indexHtmlPath);
+  } else {
+    console.log('Frontend index.html found at:', indexHtmlPath);
+  }
+
+  const indexPath = pathToFileURL(indexHtmlPath).href;
   const iconPath = path.join(basePath, 'icon.ico');
 
-  console.log("Loading main window from:", indexPath);
+  console.log('Loading main window from URL:', indexPath);
 
   mainWindow = new BrowserWindow({
     width: 1280,
@@ -113,16 +134,20 @@ function showMainWindow() {
 }
 
 app.whenReady().then(() => {
+  console.log('App is ready');
+  console.log('Electron __dirname:', __dirname);
+  console.log('Process cwd:', process.cwd());
+
   const dataDir = ensureDataDirectory();
   createSplashWindow();
   startBackend(dataDir);
 
   setTimeout(() => {
     if (!mainWindow) {
-      console.log("Backend taking long… opening main window anyway.");
+      console.log("Backend taking too long; opening main window anyway.");
       showMainWindow();
     }
-  }, 20000);
+  }, 30000);  // increased timeout to 30 sec
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createSplashWindow();

@@ -20,12 +20,21 @@ jobs:
       - name: Build backend with Maven
         run: mvn -f backend/pom.xml clean package
 
+      - name: List backend JAR files
+        run: ls -l backend/target/
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
       - run: npm install
+
+      - name: List frontend build files
+        run: ls -l frontend/build/
+
+      - name: Check java executable location
+        run: which java
 
       - name: Install gtimeout (for macOS)
         run: brew install coreutils
@@ -35,8 +44,9 @@ jobs:
 
       - name: Test App with npm start
         env:
-          JAVA_EXEC: java   # use system java executable on runner
+          JAVA_EXEC: java   # Use system Java in CI
+          ELECTRON_ENABLE_LOGGING: 1
         run: |
           echo "Starting Electron app in test mode..."
-          gtimeout 120 npm start || true
+          gtimeout 300 npm start || true   # increased timeout to 300 seconds
         continue-on-error: true
