@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder",
-    "build": "electron-builder"
+    "dist": "electron-builder --publish never",
+    "build": "electron-builder --publish never"
   },
   "keywords": [
     "room",
