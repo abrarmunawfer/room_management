@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "build": "electron-builder"
   },
   "keywords": [
     "room",
@@ -70,11 +71,6 @@
       "perMachine": true,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true
-    },
-    "scripts": {
-      "start": "electron .",
-      "build": "electron-builder"
     }
-
   }
 }
