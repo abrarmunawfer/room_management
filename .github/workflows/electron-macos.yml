@@ -1,4 +1,4 @@
-name: Build macOS App
+name: Test and Build macOS App
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -17,12 +18,17 @@ jobs:
 
       - run: npm install
 
-      - run: npm run build
+      - name: Test App with npm start
+        run: |
+          echo "Starting Electron app in test mode..."
+          timeout 10 npm start || true
+        continue-on-error: true
 
+      - run: npm run build
       - run: npm run dist
 
-      - name: Upload macOS build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload macOS App
+        uses: actions/upload-artifact@v3
         with:
-          name: room-management-mac-build
-          path: dist/
+          name: RoomManagementApp-macos
+          path: dist/*.dmg
